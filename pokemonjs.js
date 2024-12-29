@@ -56,7 +56,9 @@ function obtenerPokemon(pokemon) {
         .then(data => {
             pokemonData = data; 
             imagenP(data);    
-            grafica(data);  
+            grafica(data); 
+            dibtipos(data) 
+            
         })
         .catch(error => console.error('Error:', error));
 }
@@ -115,6 +117,18 @@ function imagenP(data) {
             <p>Habilidad</p>
             <p>Espuma</p>
         </div>`;
+
+        fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
+        .then(response => response.json())
+        .then(data => infoP(data));
+
+        data.types.forEach(type => {
+            fetch(`https://pokeapi.co/api/v2/type/${type.type.name}`)
+            .then(response => response.json())
+            .then(data => data);
+        });
+
+       
 }
 
 
@@ -125,8 +139,32 @@ function imagenP(data) {
 
 function infoP(params) {
     const texto = params.flavor_text_entries.find(entry => entry.language.name === "es").flavor_text;
+    console.log(texto)
     descripcion.textContent = texto;
 }
+
+
+
+
+function dibtipos(data) {
+
+    const tipos = data.types.map(type => type.type.name);
+
+    console.log(data.types);
+
+                  
+    const divTipos = document.querySelector('.todos-tipos');
+
+    tipos.forEach(resulttipos => {
+        const span = document.createElement('p');
+        span.classList.add('tipo-' + resulttipos);
+        span.textContent = resulttipos;
+        divTipos.appendChild(span);
+    });
+
+  
+}
+
 
 function grafica(data) {
 
