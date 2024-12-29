@@ -63,6 +63,16 @@ function obtenerPokemon(pokemon) {
         .catch(error => console.error('Error:', error));
 }
 
+function evolucionesget(pokemon) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+        .then(response => response.json())
+        .then(data => {
+     
+            
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 //  llamar función obtenerPokemon
 obtenerPokemon(pokemon);
 
@@ -269,12 +279,57 @@ fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
             // 2. Obtener la cadena de evolución
             fetch(evolutionUrl)
                 .then(response => response.json())
-                .then(data => evoluciones(data.chain)) // Procesar la cadena
+                .then(data => evolucionesda(data.chain)) // Procesar la cadena
                 .catch(error => console.error('Error en la cadena de evolución:', error));
         })
         .catch(error => console.error('Error en la especie:', error));
 
-function evoluciones(data) {
 
-   
+
+        let globalData = fetch('https://pokeapi.co/api/v2/pokemon/1')
+    .then((response) => response.json())
+    .catch(error => console.error)
+
+
+function evolucionesda(data) {
+
+    const evolucione = [data.species.name]; // Inicializar con el primer Pokémon
+    let evolution = data.evolves_to[0]; // Siguiente evolución
+
+    // Iterar sobre las evoluciones
+    while (evolution) {
+        evolucione.push(evolution.species.name); // Agregar a la lista
+        evolution = evolution.evolves_to[0]; // Siguiente evolución
+    }
+
+    let datos = [];
+
+    const divEvolution = document.querySelector('.evoluciones');
+    Promise.all(
+        evolucione.map(pokemon => 
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error))
+        )
+    ).then(results => {
+        datos = results; // Almacena todos los resultados cuando estén listos
+    
+        datos.forEach(pokemon => { 
+            divEvolution.innerHTML += `
+                <a  href="pokemon.html?pokemon=${pokemon.id}">
+                    <div class="imagen-evolucion">
+
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
+                            alt="${pokemon.name}">
+                    </div>
+                    <p>${pokemon.name}</p>
+                </a>`;
+        // Separar elementos de datos
+    });
+    }).catch(error => console.error('Error en la promesa:', error));
+    
+
+ 
+
 }
+

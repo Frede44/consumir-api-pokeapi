@@ -498,6 +498,13 @@ h1{
     width: 250px;
     height: 250px;
     background-color: rgb(173, 173, 173);
+    
+}
+
+a{
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(0, 0, 0);
 }
 
 .evoluciones p{
@@ -505,4 +512,5 @@ h1{
     font-size: 20px;
     text-align: center;
     margin-top: 20px;
+   
 }
