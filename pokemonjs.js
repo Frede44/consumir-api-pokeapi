@@ -46,69 +46,82 @@ const datos = document.querySelector('.datos');
 const descripcion = document.querySelector('.descripcion');
 const nombrePokemon = document.querySelector('.nombre-pokemon');
 var ctx = document.getElementById('myChart').getContext('2d');
-let pokemonData = {}; // Variable para almacenar datos del Pokémon
-console.log(pokemon);
+let pokemonData = {}; 
+let imagen = '<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+pokemon+'.png'
 
-// Función para obtener los datos del Pokémon
+
 function obtenerPokemon(pokemon) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         .then(response => response.json())
         .then(data => {
-            pokemonData = data; // Guarda los datos en la variable global
-            imagenP(data);     // Usa los datos en la función imagenP
-            grafica(data);     // Ahora pasamos los datos a la función grafica
+            pokemonData = data; 
+            imagenP(data);    
+            grafica(data);  
         })
         .catch(error => console.error('Error:', error));
 }
 
-// Llama a la función obtenerPokemon
+//  llamar función obtenerPokemon
 obtenerPokemon(pokemon);
 
 // Función para mostrar la imagen y detalles
 function imagenP(data) {
-    imagenPokemon.innerHTML = `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png" alt="${data.name}">
-                        <div class="escojer-forma">
-                            <span class="forma-normal">forma normal</span>
-                            <span class="forma-shiny">forma shiny</span>
-                        </div>`;
 
-    // Llama a otra API para obtener más información
-    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
-        .then(response => response.json())
-        .then(data => infoP(data));
+    let imgElement = document.querySelector('#pokemon-image');
+    if (!imgElement) {
+        imgElement = document.createElement('img');
+        imgElement.id = 'pokemon-image';
+        imagenPokemon.appendChild(imgElement);
+    }
 
-    // Convierte peso y altura
-    const hectagramos = data.weight;
-    const decimetros = data.height;
+    imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
+    imgElement.alt = data.name;
 
-    const kilogramos = hectagramos / 10;
-    const metros = decimetros / 10;
+    const kilogramos = data.weight / 10;
+    const metros = data.height / 10;
+
 
     nombrePokemon.textContent = data.name;
 
-    // Muestra información
-    datos.innerHTML = ` 
-                            <div class="div-datos">
-                                <p>Altura</p>
-                                <p>${metros} m</p>
-                            </div>
-                            <div class="div-datos">
-                                <p>Peso</p>
-                                <p>${kilogramos} kg</p>
-                            </div>
-                            <div class="div-datos">
-                                <p>Sexo</p>
-                                <p>♂ 50% ♀ 50%</p>
-                            </div>
-                            <div class="div-datos">
-                                <p>categoria</p>
-                                <p>semilla</p>
-                            </div>
-                            <div class="div-datos">
-                                <p>habilidad</p>
-                                <p>espuma</p>
-                            </div>`;
+
+    const formaShiny = document.querySelector('.forma-shiny');
+    formaShiny.addEventListener('click', () => {
+        imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${data.id}.png`;
+    });
+
+    const formaNormal = document.querySelector('.forma-normal');
+    formaNormal.addEventListener('click', () =>{
+        imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
+    })
+
+    datos.innerHTML = `
+        <div class="div-datos">
+            <p>Altura</p>
+            <p>${metros} m</p>
+        </div>
+        <div class="div-datos">
+            <p>Peso</p>
+            <p>${kilogramos} kg</p>
+        </div>
+        <div class="div-datos">
+            <p>Sexo</p>
+            <p>♂ 50% ♀ 50%</p>
+        </div>
+        <div class="div-datos">
+            <p>Categoría</p>
+            <p>Semilla</p>
+        </div>
+        <div class="div-datos">
+            <p>Habilidad</p>
+            <p>Espuma</p>
+        </div>`;
 }
+
+
+// Función para cambiar pokemon a shainy 
+
+
+
 
 function infoP(params) {
     const texto = params.flavor_text_entries.find(entry => entry.language.name === "es").flavor_text;
@@ -162,5 +175,5 @@ fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
 
 function evoluciones(data) {
 
-    console.log(data.evolution_chain.url);
+   
 }
