@@ -66,6 +66,45 @@ function obtenerPokemon(pokemon) {
 //  llamar función obtenerPokemon
 obtenerPokemon(pokemon);
 
+
+async function debilidades(pokemon) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+    const data = await response.json();
+    const types = data.types.map(t => t.type.url);
+  
+    let weaknesses = [];
+    for (const typeUrl of types) {
+      const typeData = await fetch(typeUrl).then(res => res.json());
+      weaknesses.push(...typeData.damage_relations.double_damage_from.map(t => t.name));
+    }
+  
+    const uniqueWeaknesses = [...new Set(weaknesses)];
+    
+    // Llamada a otra función para procesar los datos obtenidos
+    dibujarDebilidades(pokemon, uniqueWeaknesses);
+  }
+  
+  // Segunda función que recibe los datos obtenidos
+  function dibujarDebilidades(pokemon, weaknesses) {
+
+         const span = document.createElement('span');
+         const div = document.querySelector('.debilidades-tipos');
+        for (const weakness of weaknesses) {
+            const span = document.createElement('span');
+            span.textContent = weakness;
+            span.classList.add('tipo-' + weakness);
+            div.appendChild(span);
+        }
+    // Aquí puedes hacer cualquier otra acción, como mostrar en el DOM}
+  }
+  
+  // Llamada inicial
+ 
+  
+  
+
+
+
 // Función para mostrar la imagen y detalles
 function imagenP(data) {
 
@@ -139,18 +178,24 @@ function imagenP(data) {
 
 function infoP(params) {
     const texto = params.flavor_text_entries.find(entry => entry.language.name === "es").flavor_text;
-    console.log(texto)
+
     descripcion.textContent = texto;
 }
 
 
 
 
+debilidades(pokemon);
 function dibtipos(data) {
+
+    const pokemon = data.name;
+
+
 
     const tipos = data.types.map(type => type.type.name);
 
-    console.log(data.types);
+    const tipo1 = tipos[0];
+    const tipo2 = tipos[1];
 
                   
     const divTipos = document.querySelector('.todos-tipos');
@@ -160,9 +205,27 @@ function dibtipos(data) {
         span.classList.add('tipo-' + resulttipos);
         span.textContent = resulttipos;
         divTipos.appendChild(span);
+
     });
 
+   
+   
+
+
+
   
+}
+
+
+
+  
+
+
+
+di();
+function di() {
+
+
 }
 
 
