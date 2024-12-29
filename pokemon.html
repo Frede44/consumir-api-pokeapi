@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/estilosPokemon.css">
+    <title>pokemon</title>
+</head>
+
+<body>
+    <header class="encabezado">
+        <img src="img/poklo.webp" alt="logo pokedex" class="logoPokedex">
+
+        <div>
+            <button class="busquedaBtn">busqueda avanzada</button>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="info-e-imagen">
+                <div class="imagen-pokemon-d">
+                </div>
+                <section class="info-pokemon">
+                    <h1 class="nombre-pokemon"></h1>
+                    <p class="descripcion"></p>
+                    <div class="datos"></div>
+                </section>
+            </div>
+
+            <section class="tipos-debilidades">
+                <div class="tipos">
+                    <p>tipo</p>
+                    <div class="todos-tipos">
+                        <p class="tipo-grass">planta</p>
+                    </div>
+                </div>
+                <div class="debilidades">
+                    <p>debilidades</p>
+                    <section class="debilidades-tipos">
+                        <p class="tipo-fire">fuego</p>
+                        <p class="tipo-ice">hielo</p>
+                        <p class="tipo-flying">volador</p>
+                        <p class="tipo-psychic">psíquico</p>
+                    </section>
+                </div>
+            </section>
+
+
+            <section class="estadisticas">
+                <canvas id="myChart"></canvas>
+            </section>
+
+            <section class="evoluciones">
+                <div>
+                    <div class="imagen-evolucion">
+
+                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png"
+                            alt="">
+                    </div>
+                    <p>bulbasaur</p>
+                </div>
+                <div>
+                    <div class="imagen-evolucion">
+
+                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/002.png"
+                            alt="">
+                    </div>
+                    <p>ivysaur</p>
+                </div>
+                <div>
+                    <div class="imagen-evolucion">
+
+                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/003.png"
+                            alt="">
+                    </div>
+                    <p>venusaur</p>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="pokemonjs.js">
+       
+    </script>
+</body>
+
+</html>

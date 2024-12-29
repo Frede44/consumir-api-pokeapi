@@ -1,0 +1,507 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+:root{
+    --color-primario: #3688f4;
+    --color-secundario: #f44336;
+    --color-fire: #f08030;
+    --color-grass: #78c850;
+    --color-electric: #f8d030;
+    --color-water: #6890f0;
+    --color-psychic: #f85888;
+    --color-ice: #98d8d8;
+    --color-dragon: #7038f8;
+    --color-dark: #705848;
+    --color-fairy: #ee99ac;
+    --color-ghost: #705898;
+    --color-normal: #a8a878;
+    --color-fighting: #c03028;
+    --color-flying: #a890f0;
+    --color-poison: #a040a0;
+    --color-ground: #e0c068;
+    --color-rock: #b8a038;
+    --color-bug: #a8b820;
+    --color-steel: #b8b8d0;
+
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.encabezado{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 20px;
+    background-color: #f44336;
+}
+
+.logoPokedex{
+    
+    height: 70px;
+    margin-left: 20px;
+}
+
+.busqueda{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: solid 1px #000;
+    width: 390px;
+    background-color: white;
+}
+
+
+
+.busqueda input{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: 370px;
+    font-size: 16px;
+    padding: 1px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+
+.iconoBusqueda{
+    width: 30px;
+    height: 40px; 
+    padding: 1px;
+
+}
+
+.busquedaBtn{
+    background-color: #3688f4;
+    border: solid 2px #000;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+
+}
+
+/*estilos de la la info completa*/
+.info-e-imagen{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/*estilos imagenes*/
+
+.imagen-pokemon-d{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    background-image: url(../img/fondo3.avif); 
+    background-size: cover;
+    margin-top: 20px;
+    padding: 20px;
+    width: 600px;
+}   
+
+.imagen-pokemon-d img{
+    width: 400px;
+    height: 400px;
+    
+    margin: 0 auto;
+}
+
+.escojer-forma{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.escojer-forma span{
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    border: solid 3px #000;
+    background-color: #3688f4;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+/* estilos de infromacion sobre los pokemon */
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-pokemon{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 600px;
+    padding: 20px;
+
+}
+
+.descripcion{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+
+}
+
+.datos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+
+
+}
+
+.div-datos{
+    display: flex;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    flex-direction: column;
+    
+}
+
+/*estilos de la habilidades y debilidades*/
+
+.tipos-debilidades{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #8f8e8e;
+    border-radius: 10px;
+}
+
+.debilidades{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.debilidades p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    
+
+}
+
+.debilidades-tipos{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.tipos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+
+}
+
+.tipos p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+
+}
+
+.todos-tipos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.tipo-grass{
+    background-color: var(--color-grass);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-poison{
+    background-color: var(--color-poison);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-fire{
+    background-color: var(--color-fire);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-flying{
+    background-color: var(--color-flying);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-bug{
+    background-color: var(--color-bug);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-normal{
+    background-color: var(--color-normal);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-electric{
+    background-color: var(--color-electric);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-ground{
+    background-color: var(--color-ground);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-fairy{
+    background-color: var(--color-fairy);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-psychic{
+    background-color: var(--color-psychic);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-ice{
+    background-color: var(--color-ice);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-fighting{
+    background-color: var(--color-fighting);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-rock{
+    background-color: var(--color-rock);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-ghost{
+    background-color: var(--color-ghost);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-dragon{
+    background-color: var(--color-dragon);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-dark{
+    background-color: var(--color-dark);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-steel{
+    background-color: var(--color-steel);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-water{
+    background-color: var(--color-water);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-ghost{
+    background-color: var(--color-ghost);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-psychic{
+    background-color: var(--color-psychic);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+
+
+.tipo-dragon{
+    background-color: var(--color-dragon);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tipo-dark{
+    background-color: var(--color-dark);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 5px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+/*estilos de las habilidades*/
+
+#myChart{
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+/*estilos de las evoluciones*/
+
+
+.evoluciones{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #8f8e8e;
+    border-radius: 10px;  
+
+}
+
+.evoluciones img{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.imagen-evolucion{
+    border: solid 2px #000;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    background-color: rgb(173, 173, 173);
+}
+
+.evoluciones p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
