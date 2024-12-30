@@ -22,13 +22,14 @@ const contenedor = document.querySelector('.pokemon-container');
 const botonCargar = document.querySelector('.btn-cargar');
 const buscar = document.getElementById('busqueda');
 const ordenarAleatorio = document.getElementById('btnAleatorio');
+const ordenar = document.getElementById('ordenar');
 
 let offset = 0;
 let limit = 30;
 
 
 let pokemonCache = {};
-let allPokemons = []; /
+let allPokemons = []; 
 
 
 botonCargar.addEventListener('click', () => {
@@ -141,8 +142,33 @@ ordenarAleatorio.addEventListener('click', () => {
 
   // Ordenar aleatoriamente
   allPokemons.sort(() => Math.random() - 0.5);
-  console.log(Math.random() - 0.5);
+
   llamarApi(allPokemons);
-}
-);
+
+
+
+});
+
+ordenar.addEventListener('change', () => {
+
+  console.log(ordenar.value)
+  contenedor.innerHTML = ""; // Limpiar resultados previos
+
+  if (ordenar.value === 'ascendente') {
+
+    allPokemons.reverse();
+  } else if (ordenar.value === 'descendente') {
+    allPokemons.reverse();
+    console.log(allPokemons)
+  }else if (ordenar.value === 'a-z') {
+    allPokemons.sort((a, b) => a.name.localeCompare(b.name));
+  }else if (ordenar.value === 'z-a') {
+    allPokemons.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
+  llamarApi(allPokemons);
+});
+
+
+
 
