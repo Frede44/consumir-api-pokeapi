@@ -167,7 +167,7 @@ main{
 
 .card-pokemon-grass{
     background-color: var(--color-grass);
-    background-image: url('img/pokeball_icon_136305.svg') ;
+    background-image: url('./img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
