@@ -167,7 +167,7 @@ main{
 
 .card-pokemon-grass{
     background-color: var(--color-grass);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -182,7 +182,7 @@ main{
 
 .card-pokemon-fire{
     background-color: var(--color-fire);
-    background-image: url('/img/pokeball_icon_136305.svg') ; 
+    background-image: url('img/pokeball_icon_136305.svg') ; 
     border-radius: 10px;
     padding: 20px;
     background-repeat: no-repeat;
@@ -196,7 +196,7 @@ main{
 
 .card-pokemon-water{
     background-color: var(--color-water);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
