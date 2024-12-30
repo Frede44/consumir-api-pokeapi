@@ -26,11 +26,11 @@ const ordenarAleatorio = document.getElementById('btnAleatorio');
 let offset = 0;
 let limit = 30;
 
-// Caché local para mejorar rendimiento
-let pokemonCache = {};
-let allPokemons = []; // Almacena todos los Pokémon cargados localmente
 
-// Cargar más Pokémon al hacer clic
+let pokemonCache = {};
+let allPokemons = []; /
+
+
 botonCargar.addEventListener('click', () => {
   offset += 30;
   cargarPokemons(offset, limit);
@@ -39,27 +39,27 @@ botonCargar.addEventListener('click', () => {
 // Primera carga
 cargarPokemons(offset, limit);
 
-// Función para cargar Pokémon por página
+
 function cargarPokemons(offset, limit) {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
     .then(response => response.json())
     .then(data => {
-      allPokemons = [...allPokemons, ...data.results]; // Añadir los Pokémon al caché
+      allPokemons = [...allPokemons, ...data.results]; 
       llamarApi(data.results);
     })
     .catch(error => console.error('Error:', error));
 }
 
-// Llamar a la API para obtener detalles
+
 function llamarApi(pokemons) {
   const promises = pokemons.map(p => {
     if (pokemonCache[p.name]) {
-      return Promise.resolve(pokemonCache[p.name]); // Usa caché
+      return Promise.resolve(pokemonCache[p.name]); 
     } else {
       return fetch(p.url)
         .then(res => res.json())
         .then(data => {
-          pokemonCache[p.name] = data; // Guarda en caché
+          pokemonCache[p.name] = data; 
           return data;
         });
     }
@@ -70,9 +70,8 @@ function llamarApi(pokemons) {
     .catch(error => console.error('Error:', error));
 }
 
-// Crear tarjeta para mostrar cada Pokémon
 function crearcard(pokemons) {
-  let tiposHTML = ""; // Almacena los tipos
+  let tiposHTML = ""; 
 
   for (let index = 0; index < pokemons.types.length; index++) {
     tiposHTML += `<span class="tipo-${pokemons.types[index].type.name}">
@@ -99,7 +98,7 @@ function crearcard(pokemons) {
             </a>`;
 }
 
-// **Buscar Pokémon por nombre** (local + API)
+
 let debounceTimer;
 buscar.addEventListener('keyup', () => {
   clearTimeout(debounceTimer);
@@ -111,13 +110,13 @@ buscar.addEventListener('keyup', () => {
       pokemon.name.toLowerCase().includes(texto)
     );
 
-    contenedor.innerHTML = ""; // Limpiar resultados previos
+    contenedor.innerHTML = ""; 
 
     if (pokemonsFiltrados.length > 0) {
-      // Mostrar resultados desde el caché local
+    
       llamarApi(pokemonsFiltrados);
     } else {
-      // Buscar dinámicamente en la API
+   
       fetch(`https://pokeapi.co/api/v2/pokemon/${texto}`)
         .then(response => {
           if (!response.ok) {
@@ -126,14 +125,14 @@ buscar.addEventListener('keyup', () => {
           return response.json();
         })
         .then(data => {
-          pokemonCache[data.name] = data; // Añadir al caché
+          pokemonCache[data.name] = data;
           crearcard(data); // Mostrar resultado
         })
         .catch(() => {
           contenedor.innerHTML = `<p>No se encontró el Pokémon "${texto}"</p>`;
         });
     }
-  }, 300); // Espera 300ms antes de ejecutar
+  }, 300); 
 });
 
 
@@ -146,3 +145,4 @@ ordenarAleatorio.addEventListener('click', () => {
   llamarApi(allPokemons);
 }
 );
+
