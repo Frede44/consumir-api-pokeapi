@@ -167,7 +167,7 @@ main{
 
 .card-pokemon-grass{
     background-color: var(--color-grass);
-    background-image: url('./img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -182,7 +182,7 @@ main{
 
 .card-pokemon-fire{
     background-color: var(--color-fire);
-    background-image: url('img/pokeball_icon_136305.svg') ; 
+    background-image: url('../img/pokeball_icon_136305.svg') ; 
     border-radius: 10px;
     padding: 20px;
     background-repeat: no-repeat;
@@ -196,7 +196,7 @@ main{
 
 .card-pokemon-water{
     background-color: var(--color-water);
-    background-image: url('img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -211,7 +211,7 @@ main{
 
 .card-pokemon-electric{
     background-color: var(--color-electric);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -226,7 +226,7 @@ main{
 
 .card-pokemon-psychic{
     background-color: var(--color-psychic);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -241,7 +241,7 @@ main{
 
 .card-pokemon-ice{
     background-color: var(--color-ice);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -256,7 +256,7 @@ main{
 
 .card-pokemon-dragon{
     background-color: var(--color-dragon);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -271,7 +271,7 @@ main{
 
 .card-pokemon-dark{
     background-color: var(--color-dark);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../mg/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -286,7 +286,7 @@ main{
 
 .card-pokemon-fairy{
     background-color: var(--color-fairy);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -301,7 +301,7 @@ main{
 
 .card-pokemon-ghost{
     background-color: var(--color-ghost);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -316,7 +316,7 @@ main{
 
 .card-pokemon-normal{
     background-color: var(--color-normal);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -331,7 +331,7 @@ main{
 
 .card-pokemon-fighting{
     background-color: var(--color-fighting);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -346,7 +346,7 @@ main{
 
 .card-pokemon-flying{
     background-color: var(--color-flying);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -361,7 +361,7 @@ main{
 
 .card-pokemon-poison{
     background-color: var(--color-poison);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -376,7 +376,7 @@ main{
 
 .card-pokemon-steel{
     background-color: var(--color-steel);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -391,7 +391,7 @@ main{
 
 .card-pokemon-bug{
     background-color: var(--color-bug);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -406,7 +406,7 @@ main{
 
 .card-pokemon-rock{
     background-color: var(--color-rock);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -421,7 +421,7 @@ main{
 
 .card-pokemon-ground{
     background-color: var(--color-ground);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
@@ -436,7 +436,7 @@ main{
 
 .card-pokemon-ghost{
     background-color: var(--color-ghost);
-    background-image: url('/img/pokeball_icon_136305.svg') ;
+    background-image: url('../img/pokeball_icon_136305.svg') ;
    
     border-radius: 10px;
     padding: 20px;
