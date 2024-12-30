@@ -38,6 +38,10 @@
     background-color: #f44336;
 }
 
+.ocultar{
+    display: none;
+}
+
 .logoPokedex{
     
     height: 70px;
@@ -997,4 +1001,48 @@ footer{
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     margin-top: 20px;
+}
+
+/* estilos para telefono o dispositivos pequeños */
+@media screen and (max-width: 750px) {
+    .busqueda{
+        display: none;
+    }
+
+
+
+    .imagen-pokemon{
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .pokemon-container{
+        display: grid;
+        grid-template-columns: calc(100% - 20px);
+        width: 100%;
+        padding: 5px;
+        margin: 20px;
+        gap: 6px;
+       
+    
+    
+    }
+
+    .busquedaBtn{
+        display: none;
+    }
+
+    .ocultar{
+        display: block;
+    }
+
+    .logoPokedex{
+    
+        height: 50px;
+        margin-left: 10px;
+    }
+    
+    
 }
