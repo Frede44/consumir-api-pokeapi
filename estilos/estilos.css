@@ -79,6 +79,7 @@
 }
 
 .busquedaBtn{
+    display: none;
     background-color: #3688f4;
     border: solid 2px #000;
     border-radius: 10px;
