@@ -113,7 +113,6 @@ main{
 
 .btnAleatorio{
     background-color: #3688f4;
-    
     border-radius: 6px;
     width: 280px;
     height: 40px;
@@ -1043,6 +1042,15 @@ footer{
     
         height: 50px;
         margin-left: 10px;
+    }
+
+    .btnAleatorio{
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .controles select{
+        width: 150px;
     }
     
     
