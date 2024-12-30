@@ -514,3 +514,69 @@ a{
     margin-top: 20px;
    
 }
+
+/*Estilos para pantallas pequeñas*/
+
+@media screen and (max-width: 750px) {
+
+    .logoPokedex{
+        height: 50px;
+    } 
+
+    .encabezado{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f44336;
+    }
+
+    .info-e-imagen{
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    
+
+    }
+    
+    /*estilos imagenes*/
+    
+    .imagen-pokemon-d{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        flex-direction: column;
+        background-image: url(../img/fondo3.avif); 
+        background-size: cover;
+        width: 100%;
+    }   
+    
+    .imagen-pokemon-d img{
+        width: 200px;
+        height: 200px;
+        margin: 0 ;
+    }
+
+    #myChart{
+        width: 100%;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    
+.evoluciones img{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.imagen-evolucion{
+
+    width: 150px;
+    height: 150px;
+
+    
+}
+
+    
+}
