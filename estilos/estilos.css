@@ -38,7 +38,7 @@
     background-color: #f44336;
 }
 
-.ocultar{
+.btnocultar{
     display: none;
 }
 
@@ -1034,8 +1034,9 @@ footer{
         display: none;
     }
 
-    .ocultar{
+    .btnocultar{
         display: block;
+        width: 40px;
     }
 
     .logoPokedex{
