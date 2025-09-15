@@ -17,27 +17,33 @@ PokeWeb es una página web sencilla hecha con **HTML**, **CSS** y **JavaScript**
 
 ## Funcionalidades
 
-* Listado de Pokémon con paginación (por ejemplo 20 por página).
-* Búsqueda por nombre o ID.
-* Ver ficha detallada en un modal o página aparte (sprites, tipos, estadísticas, peso, altura, habilidades).
-* Manejo básico de errores (API no disponible, Pokémon no encontrado).
-* Indicador de carga (spinner) mientras se obtienen datos.
-* Opcional: guardar favoritos en localStorage.
+* 📋 Listar Pokémon en tarjetas dinámicas.
+
+* 🔍 Buscar Pokémon por nombre.
+
+* 📥 Cargar más Pokémon en lotes de 30.
+
+* 🔁 Ordenar Pokémon de forma aleatoria.
+
+* ↕️ Ordenar de forma ascendente, descendente o alfabéticamente (A-Z / Z-A).
+
+* ⚡ Ver los tipos, nombre, ID y sprite oficial de cada Pokémon.
 
 ---
 
 ## Estructura de archivos (sugerida)
 
 ```
-pokedex/
+consumir-api-pokeapi/
 ├─ index.html         # Página principal
-├─ css/
-│  └─ styles.css
+├─ estilos/
+│  ├─ estilos.css
+│  └─ estilospokemon.css
 ├─ js/
-│  ├─ api.js          # Funciones para llamar a PokeAPI
-│  ├─ app.js          # Lógica de la UI, paginación, eventos
-│  └─ utils.js        # Helpers (formatos, manejo de localStorage)
-└─ assets/
+│  ├─ javascript.js          # Funciones para llamar a PokeAPI
+│  ├─ pokemon.js          # Lógica de la UI, paginación, eventos
+│  └─ .js        # Helpers (formatos, manejo de localStorage)
+└─ img/
    └─ (imagenes, iconos)
 ```
 
@@ -66,25 +72,7 @@ pokedex/
 * Evita llamadas repetidas: cachea resultados frecuentes en `sessionStorage` o `localStorage`.
 * Respeta límites y buenas prácticas (no spamear la API con peticiones innecesarias).
 
----
 
-## Ejemplo de uso en `api.js`
-
-```js
-const API_BASE = 'https://pokeapi.co/api/v2';
-
-async function fetchPokemonList(limit = 20, offset = 0) {
-  const res = await fetch(`${API_BASE}/pokemon?limit=${limit}&offset=${offset}`);
-  if (!res.ok) throw new Error('Error al obtener lista');
-  return res.json();
-}
-
-async function fetchPokemon(idOrName) {
-  const res = await fetch(`${API_BASE}/pokemon/${idOrName}`);
-  if (!res.ok) throw new Error('Pokémon no encontrado');
-  return res.json();
-}
-```
 
 ---
 
