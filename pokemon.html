@@ -1,105 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
 
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estilosPokemon.css">
-    <title>pokemon</title>
+    <link rel="icon" href="img/743977.png">
+    <title>Pokémon - Pokédex</title>
 </head>
-
 <body>
-    <header class="encabezado">
-     <a href="/consumir-api-pokeapi">
-        <img src="img/poklo.webp" alt="logo pokedex" class="logoPokedex">
-     </a>
-
+     <header class="encabezado">
+        <a href="/consumir-api-pokeapi">
+            <img src="img/poklo.webp" alt="logo pokedex" class="logoPokedex">
+        </a>
         <div class="divHome">
             <a href="/consumir-api-pokeapi" class="home">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="iconoHome">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                  </svg>
-                  <p>Inicio</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="iconoHome">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <p>Inicio</p>
             </a>
         </div>
-
     </header>
 
+    <!-- Loading spinner -->
+    <div id="loading" class="loading-overlay">
+        <div class="pokeball-spinner">
+            <div class="pokeball">
+                <div class="pokeball-top"></div>
+                <div class="pokeball-middle"></div>
+                <div class="pokeball-bottom"></div>
+            </div>
+        </div>
+        <p>Cargando Pokémon...</p>
+    </div>
+
     <main>
-        <section>
-            <div class="info-e-imagen">
-                <div class="imagen-pokemon-d">
-                    <div class="escojer-forma">
-                        <span class="forma-normal">forma normal</span>
-                        <span class="forma-shiny">forma shiny</span>
-                    </div>
+        <!-- Navigation breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="index.html">Pokédex</a>
+            <span>›</span>
+            <span class="current-pokemon">Pokémon</span>
+        </nav>
+
+        <section class="card info-e-imagen">
+            <div class="imagen-pokemon-d">
+                <div class="pokemon-id-badge">
+                    <span class="pokemon-id">#001</span>
                 </div>
-                <section class="info-pokemon">
-                    <h1 class="nombre-pokemon"></h1>
-                    <p class="descripcion"></p>
-                    <div class="datos"></div>
+                <div class="pokemon-image-container">
+                    <div class="image-background"></div>
+                </div>
+                <div class="escojer-forma">
+                    <button class="forma-btn forma-normal active" data-form="normal">
+                        <span>Normal</span>
+                    </button>
+                    <button class="forma-btn forma-shiny" data-form="shiny">
+                        <span>✨ Shiny</span>
+                    </button>
+                </div>
+            </div>
+            <div class="info-pokemon">
+                <h1 class="nombre-pokemon">-</h1>
+                <p class="descripcion">Cargando descripción...</p>
+                <div class="datos"></div>
+            </div>
+        </section>
+
+        <section class="card tipos-debilidades">
+            <div class="tipos">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="section-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                    </svg>
+                    Tipos
+                </h3>
+                <div class="todos-tipos">
+                </div>
+            </div>
+            <div class="debilidades">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="section-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                    Debilidades
+                </h3>
+                <section class="debilidades-tipos">
                 </section>
             </div>
-
-            <section class="tipos-debilidades">
-                <div class="tipos">
-                    <p>tipos</p>
-                    <div class="todos-tipos">
-
-                    </div>
-                    
-                </div>
-                <div class="debilidades">
-                    <p>debilidades</p>
-                    <section class="debilidades-tipos">
-                       <!--  <p class="tipo-fire">fuego</p>
-                        <p class="tipo-ice">hielo</p>
-                        <p class="tipo-flying">volador</p>
-                        <p class="tipo-psychic">psíquico</p>--->
-                    </section>
-                </div>
-            </section>
-
-
-            <section class="estadisticas">
-                <canvas id="myChart"></canvas>
-            </section>
-
-            <section class="evoluciones">
-             <!-- <a  href="pokemon.html?pokemon=${pokemons.id}
-                    <div class="imagen-evolucion">
-
-                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png"
-                            alt="">
-                    </div>
-                    <p>bulbasaur</p>
-                </a>
-                <div>
-                    <div class="imagen-evolucion">
-
-                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/002.png"
-                            alt="">
-                    </div>
-                    <p>ivysaur</p>
-                </div>
-                <div>
-                    <div class="imagen-evolucion">
-
-                        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/003.png"
-                            alt="">
-                    </div>
-                    <p>venusaur</p>
-                </div>
-                --->  
-            </section>
         </section>
+
+        <section class="card estadisticas">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="section-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                </svg>
+                Estadísticas Base
+            </h2>
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+        </section>
+
+        <section class="card evoluciones">
+           
+            <div class="cadena-evolutiva">
+                </div> <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="section-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3 3-3" />
+                </svg>
+                Cadena Evolutiva
+            </h2>
+            <div class="cadena-evolutiva">
+            </div>
+        </section>
+
+        <!-- Navigation arrows for next/previous Pokemon -->
+        <div class="pokemon-navigation">
+            <button class="nav-btn prev-pokemon" id="prevPokemon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+                Anterior
+            </button>
+            <button class="nav-btn next-pokemon" id="nextPokemon">
+                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+        </section>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script src="js/pokemonjs.js">
-       
-    </script>
+    <script src="js/pokemonjs.js"></script>
 </body>
-
 </html>

@@ -83,11 +83,12 @@ function crearcard(pokemons) {
   const idpokemonString = `N.° ${pokemons.id.toString().padStart(3, '0')}`;
 
   contenedor.innerHTML += `
-             <a class="card-pokemon" href="pokemon.html?pokemon=${pokemons.id}">
+             <a class="card-pokemon animate-slide-up" href="pokemon.html?pokemon=${pokemons.id}">
                 <div class="card-pokemon-${pokemons.types[0].type.name}">
                     <img class="imagen-pokemon"
                         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemons.id}.png"
-                        alt="${pokemons.name}">
+                        alt="${pokemons.name}"
+                        loading="lazy">
                 </div>
                 <div class="info-pokemon">
                     <h3 class="id-pokemon">${idpokemonString} </h3>
@@ -168,6 +169,54 @@ ordenar.addEventListener('change', () => {
 
   llamarApi(allPokemons);
 });
+
+// Modal functionality
+const modal = document.querySelector('.modal');
+const busquedaBtn = document.querySelector('.busquedaBtn');
+const btnOcultar = document.querySelector('.btnocultar');
+
+if (busquedaBtn) {
+  busquedaBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+}
+
+if (btnOcultar) {
+  btnOcultar.addEventListener('click', () => {
+    if (modal.style.display === 'flex') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    } else {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+}
+
+// Close modal when clicking outside
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+
+// Add scroll animation for Pokemon cards
+function addScrollAnimation() {
+  const cards = document.querySelectorAll('.card-pokemon');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('animate-slide-up');
+        }, index * 100);
+      }
+    });
+  });
+
+  cards.forEach(card => observer.observe(card));
+}
 
 
 

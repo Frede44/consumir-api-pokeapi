@@ -45,22 +45,47 @@ const infoPokemon = document.querySelector('.info-pokemon');
 const datos = document.querySelector('.datos');
 const descripcion = document.querySelector('.descripcion');
 const nombrePokemon = document.querySelector('.nombre-pokemon');
+const loadingOverlay = document.getElementById('loading');
+const pokemonIdBadge = document.querySelector('.pokemon-id');
+const currentPokemonSpan = document.querySelector('.current-pokemon');
 var ctx = document.getElementById('myChart').getContext('2d');
 let pokemonData = {}; 
-let imagen = '<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+pokemon+'.png'
+let currentChart = null;
 
 
 function obtenerPokemon(pokemon) {
+    // Show loading
+    showLoading();
+    
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         .then(response => response.json())
         .then(data => {
             pokemonData = data; 
             imagenP(data);    
             grafica(data); 
-            dibtipos(data) 
-            
+            dibtipos(data);
+            updateNavigationButtons(data.id);
+            // Hide loading after a small delay for better UX
+            setTimeout(hideLoading, 500);
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            hideLoading();
+            showError();
+        });
+}
+
+function showLoading() {
+    loadingOverlay.classList.remove('hidden');
+}
+
+function hideLoading() {
+    loadingOverlay.classList.add('hidden');
+}
+
+function showError() {
+    nombrePokemon.textContent = 'Error cargando Pokémon';
+    descripcion.textContent = 'No se pudo cargar la información del Pokémon.';
 }
 
 function evolucionesget(pokemon) {
@@ -96,16 +121,16 @@ async function debilidades(pokemon) {
   
   // Segunda función que recibe los datos obtenidos
   function dibujarDebilidades(pokemon, weaknesses) {
-
-         const span = document.createElement('span');
          const div = document.querySelector('.debilidades-tipos');
+         // Clear previous weaknesses
+         div.innerHTML = '';
+         
         for (const weakness of weaknesses) {
             const span = document.createElement('span');
-            span.textContent = weakness;
-            span.classList.add('tipo-' + weakness);
+            span.textContent = capitalizeFirst(weakness);
+            span.classList.add('tipo', 'tipo-' + weakness);
             div.appendChild(span);
         }
-    // Aquí puedes hacer cualquier otra acción, como mostrar en el DOM}
   }
   
   // Llamada inicial
@@ -117,12 +142,18 @@ async function debilidades(pokemon) {
 
 // Función para mostrar la imagen y detalles
 function imagenP(data) {
+    // Update Pokemon ID and name in various places
+    const paddedId = String(data.id).padStart(3, '0');
+    pokemonIdBadge.textContent = `#${paddedId}`;
+    currentPokemonSpan.textContent = capitalizeFirst(data.name);
+    document.title = `${capitalizeFirst(data.name)} - Pokédex`;
 
     let imgElement = document.querySelector('#pokemon-image');
     if (!imgElement) {
         imgElement = document.createElement('img');
         imgElement.id = 'pokemon-image';
-        imagenPokemon.appendChild(imgElement);
+        const imageContainer = document.querySelector('.image-background');
+        imageContainer.appendChild(imgElement);
     }
 
     imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
@@ -131,40 +162,45 @@ function imagenP(data) {
     const kilogramos = data.weight / 10;
     const metros = data.height / 10;
 
+    nombrePokemon.textContent = capitalizeFirst(data.name);
 
-    nombrePokemon.textContent = data.name;
-
-
-    const formaShiny = document.querySelector('.forma-shiny');
-    formaShiny.addEventListener('click', () => {
-        imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${data.id}.png`;
+    // Enhanced form buttons with better event handling
+    const formaButtons = document.querySelectorAll('.forma-btn');
+    formaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            formaButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            const form = button.getAttribute('data-form');
+            if (form === 'shiny') {
+                imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${data.id}.png`;
+            } else {
+                imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
+            }
+        });
     });
 
-    const formaNormal = document.querySelector('.forma-normal');
-    formaNormal.addEventListener('click', () =>{
-        imgElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
-    })
+    // Get abilities
+    const abilities = data.abilities.map(ability => capitalizeFirst(ability.ability.name)).join(', ');
 
     datos.innerHTML = `
         <div class="div-datos">
-            <p>Altura</p>
+            <h3>Altura</h3>
             <p>${metros} m</p>
         </div>
         <div class="div-datos">
-            <p>Peso</p>
+            <h3>Peso</h3>
             <p>${kilogramos} kg</p>
         </div>
         <div class="div-datos">
-            <p>Sexo</p>
-            <p>♂ 50% ♀ 50%</p>
+            <h3>Experiencia Base</h3>
+            <p>${data.base_experience}</p>
         </div>
         <div class="div-datos">
-            <p>Categoría</p>
-            <p>Semilla</p>
-        </div>
-        <div class="div-datos">
-            <p>Habilidad</p>
-            <p>Espuma</p>
+            <h3>Habilidades</h3>
+            <p>${abilities}</p>
         </div>`;
 
         fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
@@ -197,33 +233,18 @@ function infoP(params) {
 
 debilidades(pokemon);
 function dibtipos(data) {
-
-    const pokemon = data.name;
-
-
-
     const tipos = data.types.map(type => type.type.name);
-
-    const tipo1 = tipos[0];
-    const tipo2 = tipos[1];
-
-                  
     const divTipos = document.querySelector('.todos-tipos');
+    
+    // Clear previous types
+    divTipos.innerHTML = '';
 
-    tipos.forEach(resulttipos => {
-        const span = document.createElement('p');
-        span.classList.add('tipo-' + resulttipos);
-        span.textContent = resulttipos;
+    tipos.forEach(tipo => {
+        const span = document.createElement('span');
+        span.classList.add('tipo', 'tipo-' + tipo);
+        span.textContent = capitalizeFirst(tipo);
         divTipos.appendChild(span);
-
     });
-
-   
-   
-
-
-
-  
 }
 
 
@@ -232,38 +253,91 @@ function dibtipos(data) {
 
 
 
-di();
-function di() {
+// Helper function to capitalize first letter
+function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
+// Navigation functions
+function updateNavigationButtons(currentId) {
+    const prevBtn = document.getElementById('prevPokemon');
+    const nextBtn = document.getElementById('nextPokemon');
+    
+    // Update previous button
+    if (currentId > 1) {
+        prevBtn.style.display = 'flex';
+        prevBtn.onclick = () => navigateToPokemon(currentId - 1);
+    } else {
+        prevBtn.style.display = 'none';
+    }
+    
+    // Update next button (assuming there are at least 1010 Pokemon)
+    if (currentId < 1010) {
+        nextBtn.style.display = 'flex';
+        nextBtn.onclick = () => navigateToPokemon(currentId + 1);
+    } else {
+        nextBtn.style.display = 'none';
+    }
+}
 
+function navigateToPokemon(pokemonId) {
+    window.location.href = `pokemon.html?pokemon=${pokemonId}`;
 }
 
 
 function grafica(data) {
-
     let stats = data.stats.map(stat => stat.base_stat);
+    
+    // Destroy existing chart if it exists
+    if (currentChart) {
+        currentChart.destroy();
+    }
 
-
-    var myChart = new Chart(ctx, {
-        type: 'bar',
+    currentChart = new Chart(ctx, {
+        type: 'radar',
         data: {
-            labels: ['HP', 'Ataque', 'Defensa', 'Ataque Especial', 'Defensa Especial', 'Velocidad'],
+            labels: ['HP', 'Ataque', 'Defensa', 'At. Especial', 'Def. Especial', 'Velocidad'],
             datasets: [{
                 label: 'Estadísticas Base',
-                data: stats, // Usa las estadísticas obtenidas
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 2
+                data: stats,
+                backgroundColor: 'rgba(59, 76, 202, 0.2)',
+                borderColor: 'rgba(59, 76, 202, 1)',
+                borderWidth: 3,
+                pointBackgroundColor: 'rgba(59, 76, 202, 1)',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 6
             }]
         },
         options: {
-            scale: {
-                angleLines: {
-                    display: true
-                },
-                ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 150
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 150,
+                    ticks: {
+                        stepSize: 25,
+                        color: '#64748b'
+                    },
+                    grid: {
+                        color: 'rgba(100, 116, 139, 0.2)'
+                    },
+                    angleLines: {
+                        color: 'rgba(100, 116, 139, 0.2)'
+                    },
+                    pointLabels: {
+                        color: '#1e293b',
+                        font: {
+                            size: 12,
+                            weight: '600'
+                        }
+                    }
                 }
             }
         }
@@ -292,7 +366,6 @@ fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`)
 
 
 function evolucionesda(data) {
-
     const evolucione = [data.species.name]; // Inicializar con el primer Pokémon
     let evolution = data.evolves_to[0]; // Siguiente evolución
 
@@ -303,8 +376,11 @@ function evolucionesda(data) {
     }
 
     let datos = [];
+    const divEvolution = document.querySelector('.cadena-evolutiva');
+    
+    // Clear previous evolutions
+    divEvolution.innerHTML = '';
 
-    const divEvolution = document.querySelector('.evoluciones');
     Promise.all(
         evolucione.map(pokemon => 
             fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
@@ -312,24 +388,35 @@ function evolucionesda(data) {
                 .catch(error => console.error('Error:', error))
         )
     ).then(results => {
-        datos = results; // Almacena todos los resultados cuando estén listos
+        datos = results.filter(result => result !== undefined); // Filtrar resultados válidos
     
-        datos.forEach(pokemon => { 
-            divEvolution.innerHTML += `
-                <a  href="pokemon.html?pokemon=${pokemon.id}">
-                    <div class="imagen-evolucion">
-
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
-                            alt="${pokemon.name}">
-                    </div>
-                    <p>${pokemon.name}</p>
-                </a>`;
-        // Separar elementos de datos
-    });
+        datos.forEach((pokemon, index) => { 
+            const evolutionElement = document.createElement('a');
+            evolutionElement.href = `pokemon.html?pokemon=${pokemon.id}`;
+            evolutionElement.className = 'evolucion-link';
+            
+            evolutionElement.innerHTML = `
+                <div class="imagen-evolucion">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
+                        alt="${pokemon.name}">
+                </div>
+                <p>${capitalizeFirst(pokemon.name)}</p>
+            `;
+            
+            divEvolution.appendChild(evolutionElement);
+            
+            // Add evolution arrow if not the last element
+            if (index < datos.length - 1) {
+                const arrow = document.createElement('div');
+                arrow.className = 'evolution-arrow';
+                arrow.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 2rem; height: 2rem; color: var(--color-primario);">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                `;
+                divEvolution.appendChild(arrow);
+            }
+        });
     }).catch(error => console.error('Error en la promesa:', error));
-    
-
- 
-
 }
 
